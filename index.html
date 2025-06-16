@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DefensePRO - Защита вашего компьютера</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #2962ff;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Анимированный градиентный фон */
+        .hero-section {
+            background: linear-gradient(-45deg, #1a237e, #0d47a1, #2962ff, #1a237e);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: white;
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимированные частицы в фоне */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-100px) translateX(100px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+
+        /* Улучшенная навигация */
+        .navbar {
+            background: rgba(26, 35, 126, 0.95) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Улучшенные карточки */
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            background: white;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Улучшенные кнопки */
+        .download-btn {
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .download-btn:hover::before {
+            opacity: 1;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Анимированные иконки */
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Улучшенная форма контактов */
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            border: 2px solid #eee;
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(41, 98, 255, 0.25);
+        }
+
+        /* Анимированный счетчик */
+        .counter-section {
+            background: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .counter-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .counter-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        /* Анимированный футер */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+        }
+
+        /* Анимации появления */
+        [data-aos] {
+            pointer-events: none;
+        }
+
+        [data-aos].aos-animate {
+            pointer-events: auto;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 0;
+            }
+
+            .feature-card {
+                margin-bottom: 30px;
+            }
+        }
+
+        /* Стили для раздела тарифов */
+        .pricing-section {
+            background: var(--light-bg);
+            padding: 100px 0;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--accent-color);
+        }
+
+        .pricing-card.popular::before {
+            content: 'Популярный';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .pricing-price small {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li i {
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+
+        .pricing-features li.disabled {
+            color: #999;
+        }
+
+        .pricing-features li.disabled i {
+            color: #ccc;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-btn.premium {
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            border: none;
+        }
+
+        .pricing-btn.premium:hover {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-shield-alt me-2"></i>DefensePRO
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Возможности</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#counter">Статистика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#download">Скачать</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный раздел -->
+    <section class="hero-section text-center">
+        <div class="particles" id="particles"></div>
+        <div class="container">
+            <h1 class="display-4 mb-4" data-aos="fade-up">Защитите свой компьютер с DefensePRO</h1>
+            <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">Мощное антивирусное решение для полной защиты вашей системы</p>
+            <a href="#download" class="btn btn-light download-btn" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-download me-2"></i>Скачать сейчас
+            </a>
+        </div>
+    </section>
+
+    <!-- Возможности -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Возможности DefensePRO</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="card-title">Защита в реальном времени</h3>
+                            <p class="card-text">Постоянный мониторинг системы и блокировка угроз в реальном времени</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 class="card-title">Умное сканирование</h3>
+                            <p class="card-text">Быстрое и эффективное сканирование системы с минимальным влиянием на производительность</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="card feature-card h-100 p-4">
+                        <div class="card-body text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h3 class="card-title">Безопасный просмотр</h3>
+                            <p class="card-text">Защита от фишинга и вредоносных сайтов при работе в интернете</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- После секции features и перед секцией counter -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Выберите свой тариф</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Базовый</h3>
+                            <div class="pricing-price">Бесплатно</div>
+                            <p>Для домашнего использования</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Базовая защита от вирусов</li>
+                            <li><i class="fas fa-check"></i> Сканирование в реальном времени</li>
+                            <li class="disabled"><i class="fas fa-check"></i> Блокировка вредоносных сайтов</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Расширенная защита от фишинга</li>
+                            <li class="disabled"><i class="fas fa-times"></i> VPN защита</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Приоритетная поддержка</li>
+                        </ul>
+                        <a href="#download" class="btn btn-outline-primary pricing-btn">Скачать бесплатно</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="pricing-card popular">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Премиум</h3>
+                            <div class="pricing-price">999 ₽<small>/месяц</small></div>
+                            <p>Максимальная защита</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Расширенная защита от вирусов</li>
+                            <li><i class="fas fa-check"></i> Сканирование в реальном времени</li>
+                            <li><i class="fas fa-check"></i> Блокировка вредоносных сайтов</li>
+                            <li><i class="fas fa-check"></i> Расширенная защита от фишинга</li>
+                            <li><i class="fas fa-check"></i> VPN защита</li>
+                            <li><i class="fas fa-check"></i> Приоритетная поддержка 24/7</li>
+                        </ul>
+                        <a href="" class="btn pricing-btn premium">Недоступно</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Счетчик -->
+    <section id="counter" class="counter-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3" data-aos="fade-up">
+                    <div class="counter-item">
+                        <div class="counter-number" data-count="1">0</div>
+                        <p>Защищенных устройств</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="counter-item">
+                        <div class="counter-number" data-count="2309">0</div>
+                        <p>Блокированных угроз</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="counter-item">
+                        <div class="counter-number" data-count="99%">0</div>
+                        <p>Процент защиты</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">
+                    <div class="counter-item">
+                        <div class="counter-number" data-count="24">0</div>
+                        <p>Поддержка 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Скачать -->
+    <section id="download" class="py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="mb-4" data-aos="fade-up">Скачайте DefensePRO</h2>
+            <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">Выберите версию для вашей операционной системы</p>
+            <div class="row justify-content-center">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <i class="fab fa-windows fa-3x mb-3 text-primary"></i>
+                            <h3 class="card-title">Windows</h3>
+                            <p class="card-text">Версия 1.0.0</p>
+                            <a href="DefensePRO.exe" class="btn btn-primary download-btn">
+                                <i class="fas fa-download me-2"></i>Скачать для Windows
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-4" data-aos="fade-up">Свяжитесь с нами</h2>
+            <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">Если у вас есть вопросы или нужна помощь</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <form class="contact-form">
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Ваш email">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="4" placeholder="Ваше сообщение"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary download-btn">
+                            <i class="fas fa-paper-plane me-2"></i>Отправить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="py-4">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5>DefensePRO</h5>
+                    <p>Ваша надежная защита</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Контакты</h5>
+                    <p>Email: support@defensepro.com</p>
+                </div>
+            </div>
+            <p class="mb-0 mt-3">&copy; 2024 DefensePRO. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Инициализация AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Анимация навигации при скролле
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Создание частиц
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particles.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Анимация счетчика
+        function animateCounter() {
+            const counters = document.querySelectorAll('.counter-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                updateCounter();
+            });
+        }
+
+        // Запуск анимации счетчика при появлении в поле зрения
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.counter-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
